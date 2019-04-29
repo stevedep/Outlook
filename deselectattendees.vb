@@ -5,8 +5,8 @@ Dim objApp As Outlook.Application
     Dim objAttendees As Outlook.Recipients
      
     Set objApp = CreateObject("Outlook.Application")
-    Set objItem = Outlook.Application.ActiveExplorer.Selection.Item(1)
-    Set objAttendees = Outlook.Application.ActiveExplorer.Selection.Item(1).Recipients
+    Set objItem = objApp.ActiveInspector.CurrentItem
+    Set objAttendees = objItem.Recipients
     
  
     For x = 1 To objAttendees.Count
@@ -20,3 +20,4 @@ Dim objApp As Outlook.Application
     Set objAttendees = Nothing
 
 End Sub
+
