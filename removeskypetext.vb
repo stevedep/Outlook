@@ -1,7 +1,6 @@
-
 Sub removeskypetext()
 
-Dim objApp As Outlook.Application
+    Dim objApp As Outlook.Application
     Dim objItem As Object
     
     Set objApp = CreateObject("Outlook.Application")
@@ -9,17 +8,13 @@ Dim objApp As Outlook.Application
     
     Find = "Trouble"
     rt = objItem.Body
-    MsgBox rt
-    't = Replace(rt, vbCrLf, "")
-    'objItem.Body = "Hi, " & vbCrLf & vbCrLf & "Hope this time slot works." & vbCrLf
     
     
     If 1 = 1 Then
             st = InStr(rt, Find)
-            ' MsgBox st
             Find = "original message"
             eind = InStr(rt, Find)
-            'MsgBox eind
+       
             If st > 0 Then
                 repl = Mid(rt, st, eind - st + 20)
                 newv = Replace(rt, repl, "")
@@ -27,19 +22,17 @@ Dim objApp As Outlook.Application
                 stl = InStr(newv, "<")
                 eindl = InStr(newv, ">")
                 Link = Mid(newv, stl + 1, eindl - stl - 1)
-                
                 strLink = Link
                 strLinkText = "Join Skype Meeting here"
                 Set objInsp = objItem.GetInspector
                 Set objDoc = objInsp.WordEditor
-                Set objSel = objDoc.Windows(1).Selection
-                objSel.Text = "Hi," & vbCrLf & vbCrLf
-                'strLink = "http://www.outlookcode.com"
-                
-                objDoc.Hyperlinks.Add objSel.Range, strLink, "", "", strLinkText, ""
-                
+                Set objsel = objDoc.Windows(1).Selection
+                objsel.Text = "Hi," & vbCrLf & vbCrLf & "Hope this timeslot works." & vbCrLf & vbCrLf & vbCrLf & vbCrLf & vbCrLf & "Kind regards," & vbCrLf & vbCrLf & "Steve"
+                Set myRange = objDoc.Range(Start:=objsel.End - 24, End:=objsel.End - 23)
+                objsel.Hyperlinks.Add myRange, strLink, "", "", strLinkText, ""
            End If
-    
-           ' objItem.Body = newv
     End If
-
+    
+    Set objApp = Nothing
+    Set objItem = Nothing
+End Sub
