@@ -1,4 +1,3 @@
-
 Sub removeskypetext()
 
     Dim objApp As Outlook.Application
@@ -17,8 +16,15 @@ Sub removeskypetext()
             co = InStr(naam, ",")
             naam2 = Mid(naam, co + 2, Len(naam))
             sp = InStr(naam2, " ")
-            naam3 = Mid(naam2, 1, sp - 1)
-            If naam3 <> "Steve" Then
+            
+            If sp > 0 Then
+                naam3 = Mid(naam2, 1, sp - 1)
+            Else
+                naam3 = naam2
+            End If
+               
+               
+           If naam3 <> "Steve" Then
                 strNames = strNames & naam3 & ", "
             End If
     End If
@@ -45,7 +51,7 @@ Sub removeskypetext()
                 "----------------------------------------------------------------------------" & vbCrLf & vbCrLf & vbCrLf & _
                 "----------------------------------------------------------------------------" & _
                 vbCrLf & vbCrLf & "Kind regards," & vbCrLf & vbCrLf & "Steve"
-                Set myRange = objDoc.Range(Start:=objsel.End - 100, End:=objsel.End - 99)
+                Set myRange = objDoc.Range(Start:=objsel.End - 101, End:=objsel.End - 100)
                 objsel.Hyperlinks.Add myRange, strLink, "", "", strLinkText, ""
            End If
     End If
