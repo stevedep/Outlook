@@ -1,5 +1,6 @@
 Sub outlookweava()
-
+    
+    toelichting = InputBox("Toelichting")
 
     Dim objApp As Outlook.Application
     Dim objItem As Object
@@ -47,6 +48,8 @@ Sub outlookweava()
         Set xlSheet = xlBook.Sheets(1)
     End If
 
+    
+    
     ' Do stuff with Excel workbook
     With xlApp
         With xlBook
@@ -56,9 +59,14 @@ Sub outlookweava()
             'Set tbl = Range("Tabel1").ListObject
             Set newrow = tbl.ListRows.Add(AlwaysInsert:=True)
             newrow.Range(1, 1).Value = objItem.EntryID
+            newrow.Range(1, 2).Value = objItem.Subject
+            newrow.Range(1, 3).Value = objItem.Sender
+            newrow.Range(1, 4).Value = Format(objItem.SentOn, "MMM d, yyyy")
             newrow.Range(1, 5).Value = objsel
             newrow.Range(1, 6).Value = objsel.Start
             newrow.Range(1, 7).Value = objsel.End
+            newrow.Range(1, 8).Value = toelichting
+            
             
             '.Close SaveChanges:=True
         End With
