@@ -27,7 +27,7 @@ Sub outlookweava()
     Set xlApp = CreateObject("Excel.Application")
     xlApp.Visible = True
 
-    FileName = "outlook.xlsx"
+    FileName = "outlook.xlsm"
     fileDoesExist = Dir("C:\Users\Steve\Desktop\" & FileName) > ""
 
     ' Check for existing file
@@ -56,7 +56,9 @@ Sub outlookweava()
             'Set tbl = Range("Tabel1").ListObject
             Set newrow = tbl.ListRows.Add(AlwaysInsert:=True)
             newrow.Range(1, 1).Value = objItem.EntryID
-            newrow.Range(1, 2).Value = objsel
+            newrow.Range(1, 5).Value = objsel
+            newrow.Range(1, 6).Value = objsel.Start
+            newrow.Range(1, 7).Value = objsel.End
             
             '.Close SaveChanges:=True
         End With
