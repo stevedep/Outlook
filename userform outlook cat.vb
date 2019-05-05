@@ -20,7 +20,7 @@ Private Sub CommandButton1_Click()
  Next intCurrentRow
     
     myOlsel.Item(1).Categories = c & "; " & stritems
-    myOlsel.Item(1).Save
+    'myOlsel.Item(1).Save
     Set obApp = Nothing
     Set NewEmail = Nothing
 End Sub
@@ -41,6 +41,44 @@ Dim obApp As Object
     Set myOlExp = Application.ActiveExplorer
     Set myOlsel = myOlExp.Selection
     myOlsel.Item(1).Move myInbox.Folders("Done")
+    
+'    myOlsel.Item(1).Save
+    Set myOlExp = Nothing
+    Set myOlsel = Nothing
+    Set obApp = Nothing
+    Set NewEmail = Nothing
+End Sub
+
+Private Sub CommandButton3_Click()
+ Dim obApp As Object
+    Dim NewEmail As MailItem
+
+    Set obApp = Outlook.Application
+    Set myOlExp = Application.ActiveExplorer
+    Set myOlsel = myOlExp.Selection
+    
+    myOlsel.Item(1).Save
+    Set obApp = Nothing
+    Set NewEmail = Nothing
+    Set myOlsel = Nothing
+End Sub
+
+Private Sub CommandButton4_Click()
+ Dim myNameSpace As Outlook.NameSpace
+ Dim myInbox As Outlook.Folder
+ Dim myDestFolder As Outlook.Folder
+ Dim myItems As Outlook.Items
+ Dim myItem As Object
+ 
+ Set myNameSpace = Application.GetNamespace("MAPI")
+ Set myInbox = myNameSpace.GetDefaultFolder(olFolderInbox)
+Dim obApp As Object
+    Dim NewEmail As MailItem
+
+    Set obApp = Outlook.Application
+    Set myOlExp = Application.ActiveExplorer
+    Set myOlsel = myOlExp.Selection
+    myOlsel.Item(1).Move myInbox.Folders("Meetings")
     
 '    myOlsel.Item(1).Save
     Set myOlExp = Nothing
