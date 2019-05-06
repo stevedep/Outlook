@@ -24,31 +24,37 @@ Sub outlookweava()
      Set objsel = objDoc.Windows(1).Selection
 
     ' Create Excel Application
-
-    Set xlApp = CreateObject("Excel.Application")
+    Set xlApp = GetObject(, "Excel.Application")
+        If Err <> 0 Then
+            Set xlApp = CreateObject("Excel.Application")
+        End If
+        
     xlApp.Visible = True
-
-    FileName = "outlook.xlsm"
-    fileDoesExist = Dir("C:\Users\Steve\Desktop\" & FileName) > ""
-
-    ' Check for existing file
-
-    If fileDoesExist Then
-        ' Open Excel file
-        Set xlBook = xlApp.Workbooks.Open("C:\Users\Steve\Desktop\" & FileName)
-        Set xlSheet = xlBook.Sheets(1)
-    Else
-        ' Add Excel file
-        Set xlBook = xlApp.Workbooks.Add
-        With xlBook
-            .Title = "All Sales"
-            .Subject = "Sales"
-            .SaveAs FileName:="C:\Users\Steve\Desktop\" & FileName
-        End With
-        Set xlSheet = xlBook.Sheets(1)
-    End If
-
     
+    FileName = "outlook.xlsm"
+    
+    Set xlBook = xlApp.Workbooks(FileName)
+    
+    If xlBook Is Nothing Then
+          fileDoesExist = Dir("C:\Users\310267217\OneDrive - Philips\Outlook Weava\" & FileName) > ""
+        ' Check for existing file
+        If fileDoesExist Then
+            ' Open Excel file
+            Set xlBook = xlApp.Workbooks.Open("C:\Users\310267217\OneDrive - Philips\Outlook Weava\" & FileName)
+            Set xlSheet = xlBook.Sheets(1)
+        Else
+            ' Add Excel file
+            Set xlBook = xlApp.Workbooks.Add
+            With xlBook
+                .Title = "All Sales"
+                .Subject = "Sales"
+                .SaveAs FileName:="C:\Users\310267217\OneDrive - Philips\Outlook Weava\" & FileName
+            End With
+        End If
+    End If
+    
+  
+    Set xlSheet = xlBook.Sheets(1)
     
     ' Do stuff with Excel workbook
     With xlApp
@@ -66,7 +72,6 @@ Sub outlookweava()
             newrow.Range(1, 6).Value = objsel.Start
             newrow.Range(1, 7).Value = objsel.End
             newrow.Range(1, 8).Value = toelichting
-            
             
             '.Close SaveChanges:=True
         End With
