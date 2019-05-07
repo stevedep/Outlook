@@ -24,6 +24,7 @@ Sub outlookweava()
      Set objsel = objDoc.Windows(1).Selection
 
     ' Create Excel Application
+    on error resume next
     Set xlApp = GetObject(, "Excel.Application")
         If Err <> 0 Then
             Set xlApp = CreateObject("Excel.Application")
