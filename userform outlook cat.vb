@@ -35,8 +35,8 @@ Private Sub addToMail_Click()
     Set NewEmail = Nothing
         UserForm1.Hide
     UserForm1.Show
-    UserForm1.TextBox1.SetFocus
-    TextBox1.Text = ""
+   ' TextBox1.SetFocus
+    'TextBox1.Text = ""
    ' cmdSave.SetFocus
 End Sub
 
@@ -225,7 +225,7 @@ Private Sub addCategoryAndSave_Click()
     Set NewEmail = Nothing
     UserForm1.Hide
     UserForm1.Show
-    TextBox1.SetFocus
+    UserForm1.TextBox1.SetFocus
     TextBox1.Text = ""
 
 End Sub
@@ -239,14 +239,22 @@ Private Sub CommandButton1_Click()
  MsgBox obApp.ActiveWindow
 End Sub
 
+Private Sub Label2_Click()
+
+End Sub
+
 Private Sub lstCategories_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
 'MsgBox KeyCode
     'bij enter toevoegen en bewaren cat
     If KeyCode = vbKeyReturn Then addCategoryAndSave_Click
     'bij ctrl toevoegen
-    If KeyCode = 17 Then addToMail_Click
+    If KeyCode = 17 Or KeyCode = 16 Then addToMail_Click
     If KeyCode = 32 Then cmdSave_Click
-
+    If KeyCode > 64 Then
+    TextBox1.SetFocus
+    TextBox1.Text = ""
+    End If
+    
 End Sub
 
 Private Sub TextBox1_Change()
@@ -273,13 +281,3 @@ Private Sub TextBox1_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift
  If KeyCode = 18 Then cmdRemoveToDo_Click
 End Sub
 
-Private Sub UserForm_Activate()
-UserForm1.TextBox1.SetFocus
-End Sub
-
-Private Sub UserForm_Click()
-
-End Sub
-
-Private Sub UserForm_Initialize()
-End Sub
