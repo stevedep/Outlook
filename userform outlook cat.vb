@@ -33,10 +33,10 @@ Private Sub addToMail_Click()
     'myOlsel.Item(1).Save
     Set obApp = Nothing
     Set NewEmail = Nothing
-        UserForm1.Hide
+    UserForm1.Hide
     UserForm1.Show
-   ' TextBox1.SetFocus
-    'TextBox1.Text = ""
+    TextBox1.SetFocus
+    TextBox1.Text = ""
    ' cmdSave.SetFocus
 End Sub
 
@@ -68,6 +68,8 @@ Dim obApp As Object
     UserForm1.Hide
     UserForm1.Show
     UserForm1.TextBox1.SetFocus
+    UserForm1.TextBox1.Text = ""
+    
 End Sub
 
 Private Sub KeyHandler_KeyDown(KeyCode As Integer, _
@@ -230,7 +232,6 @@ Private Sub addCategoryAndSave_Click()
 
 End Sub
 
-
 Private Sub CommandButton1_Click()
  Dim obApp As Object
  
@@ -239,9 +240,6 @@ Private Sub CommandButton1_Click()
  MsgBox obApp.ActiveWindow
 End Sub
 
-Private Sub Label2_Click()
-
-End Sub
 
 Private Sub lstCategories_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
 'MsgBox KeyCode
@@ -252,7 +250,7 @@ Private Sub lstCategories_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal 
     If KeyCode = 32 Then cmdSave_Click
     If KeyCode > 64 Then
     TextBox1.SetFocus
-    TextBox1.Text = ""
+    TextBox1.Text = LCase(ChrW(KeyCode))
     End If
     
 End Sub
@@ -271,7 +269,10 @@ Private Sub TextBox1_Change()
 End Sub
 
 Private Sub TextBox1_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
+Set myOlExp = Application.ActiveExplorer
+ 
 'MsgBox KeyCode
+ 
  If KeyCode = 13 Then lstCategories.ListIndex = 0
  If KeyCode = 37 Then cmdDone_Click
  If KeyCode = 39 Then
@@ -279,5 +280,22 @@ Private Sub TextBox1_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift
     cmdMeeting_Click
  End If
  If KeyCode = 18 Then cmdRemoveToDo_Click
+ If KeyCode = 38 Then
+    myOlExp.Activate
+    SendKeys "{UP}"
+    UserForm1.Hide
+    UserForm1.Show
+    UserForm1.TextBox1.SetFocus
+ End If
+
+If KeyCode = 40 Then
+    myOlExp.Activate
+    SendKeys "{DOWN}"
+    UserForm1.Hide
+    UserForm1.Show
+    UserForm1.TextBox1.SetFocus
+ End If
+
+Set myOlExp = Nothing
 End Sub
 
