@@ -35,7 +35,7 @@ Private Sub addToMail_Click()
     Set NewEmail = Nothing
     UserForm1.Hide
     UserForm1.Show
-    TextBox1.SetFocus
+'    TextBox1.SetFocus
     TextBox1.Text = ""
    ' cmdSave.SetFocus
 End Sub
@@ -249,8 +249,13 @@ Private Sub lstCategories_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal 
     If KeyCode = 17 Or KeyCode = 16 Then addToMail_Click
     If KeyCode = 32 Then cmdSave_Click
     If KeyCode > 64 Then
-    TextBox1.SetFocus
-    TextBox1.Text = LCase(ChrW(KeyCode))
+        TextBox1.SetFocus
+        TextBox1.Text = LCase(ChrW(KeyCode))
+    End If
+    If KeyCode = 37 Then cmdDone_Click
+    If KeyCode = 39 Then
+       'MsgBox "meeting"
+       cmdMeeting_Click
     End If
     
 End Sub
@@ -282,20 +287,17 @@ Set myOlExp = Application.ActiveExplorer
  If KeyCode = 18 Then cmdRemoveToDo_Click
  If KeyCode = 38 Then
     myOlExp.Activate
-    SendKeys "{UP}"
-    UserForm1.Hide
-    UserForm1.Show
-    UserForm1.TextBox1.SetFocus
+    SendKeys "{UP}", 1
  End If
 
 If KeyCode = 40 Then
     myOlExp.Activate
-    SendKeys "{DOWN}"
-    UserForm1.Hide
-    UserForm1.Show
-    UserForm1.TextBox1.SetFocus
+    SendKeys "{DOWN}", 1
  End If
 
 Set myOlExp = Nothing
 End Sub
 
+Private Sub UserForm_Click()
+
+End Sub
