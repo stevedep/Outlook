@@ -1,4 +1,3 @@
-
 Private Sub addToMail_Click()
  Dim obApp As Object
     Dim NewEmail As MailItem
@@ -40,6 +39,26 @@ Private Sub addToMail_Click()
    ' cmdSave.SetFocus
 End Sub
 
+
+Private Sub cmdcustomcat_Click()
+   Dim obApp As Object
+    Dim NewEmail As MailItem
+    Set obApp = Outlook.Application
+    Set myOlExp = Application.ActiveExplorer
+    myOlExp.Activate
+    Set myOlsel = myOlExp.Selection
+      
+        myOlsel.Item(1).Categories = InputBox("Set Cats")
+        myOlsel.Item(1).Save
+     
+    Set obApp = Nothing
+    Set NewEmail = Nothing
+    UserForm1.Hide
+    UserForm1.Show
+    UserForm1.TextBox1.SetFocus
+    
+    TextBox1.SetFocus
+End Sub
 
 Private Sub cmdDone_Click()
  Dim myNameSpace As Outlook.NameSpace
@@ -113,6 +132,125 @@ Private Sub cmdRemoveToDo_Click()
     
     TextBox1.SetFocus
    
+End Sub
+
+Private Sub cmdReplaceToDoArchive_Click()
+   Dim obApp As Object
+    Dim NewEmail As MailItem
+    Set obApp = Outlook.Application
+    Set myOlExp = Application.ActiveExplorer
+    myOlExp.Activate
+    Set myOlsel = myOlExp.Selection
+        c = myOlsel.Item(1).Categories
+        c = Replace(c, "ToDo", "Archive")
+        myOlsel.Item(1).Categories = c
+        myOlsel.Item(1).Save
+     
+    Set obApp = Nothing
+    Set NewEmail = Nothing
+    UserForm1.Hide
+    UserForm1.Show
+    UserForm1.TextBox1.SetFocus
+    
+    TextBox1.SetFocus
+End Sub
+
+Private Sub cmdreplacetodoimportantl2_Click()
+  Dim obApp As Object
+    Dim NewEmail As MailItem
+    Set obApp = Outlook.Application
+    Set myOlExp = Application.ActiveExplorer
+    myOlExp.Activate
+    Set myOlsel = myOlExp.Selection
+        c = myOlsel.Item(1).Categories
+        c = Replace(c, Mid(c, InStr(c, "ToDo"), 6), "ImportantL2")
+        'MsgBox c
+        myOlsel.Item(1).Categories = c
+        myOlsel.Item(1).Save
+     
+    Set obApp = Nothing
+    Set NewEmail = Nothing
+    UserForm1.Hide
+    UserForm1.Show
+    UserForm1.TextBox1.SetFocus
+    
+    TextBox1.SetFocus
+End Sub
+
+Private Sub cmdReplaceToDoL1_Click()
+   Dim obApp As Object
+    Dim NewEmail As MailItem
+    Set obApp = Outlook.Application
+    Set myOlExp = Application.ActiveExplorer
+    myOlExp.Activate
+    Set myOlsel = myOlExp.Selection
+        c = myOlsel.Item(1).Categories
+        'MsgBox c
+        c = Replace(c, Mid(c, InStr(c, "ToDo"), 6), "ToDoL1")
+        'MsgBox c
+        myOlsel.Item(1).Categories = c
+        myOlsel.Item(1).Save
+     
+    Set obApp = Nothing
+    Set NewEmail = Nothing
+    UserForm1.Hide
+    UserForm1.Show
+    UserForm1.TextBox1.SetFocus
+    
+    TextBox1.SetFocus
+End Sub
+
+Private Sub cmdReplaceToDoL2_Click()
+   Dim obApp As Object
+    Dim NewEmail As MailItem
+    Set obApp = Outlook.Application
+    Set myOlExp = Application.ActiveExplorer
+    myOlExp.Activate
+    Set myOlsel = myOlExp.Selection
+        c = myOlsel.Item(1).Categories
+        c = Replace(c, Mid(c, InStr(c, "ToDo"), 6), "ToDoL2")
+        myOlsel.Item(1).Categories = c
+        myOlsel.Item(1).Save
+     
+    Set obApp = Nothing
+    Set NewEmail = Nothing
+    UserForm1.Hide
+    UserForm1.Show
+    UserForm1.TextBox1.SetFocus
+    
+    TextBox1.SetFocus
+End Sub
+
+Private Sub cmdReplToDoImportant_Click()
+   Dim obApp As Object
+    Dim NewEmail As MailItem
+    Set obApp = Outlook.Application
+    Set myOlExp = Application.ActiveExplorer
+    myOlExp.Activate
+    Set myOlsel = myOlExp.Selection
+        c = myOlsel.Item(1).Categories
+        c = Replace(c, Mid(c, InStr(c, "ToDo"), 6), "ImportantL1")
+        'MsgBox c
+        myOlsel.Item(1).Categories = c
+        myOlsel.Item(1).Save
+     
+    Set obApp = Nothing
+    Set NewEmail = Nothing
+    UserForm1.Hide
+    UserForm1.Show
+    UserForm1.TextBox1.SetFocus
+    
+'    TextBox1.SetFocus
+End Sub
+
+Private Sub cmdreset_Click()
+ Set myOlExp = Application.ActiveExplorer
+    myOlExp.Activate
+    UserForm1.Hide
+    UserForm1.Show
+    TextBox1.SetFocus
+Set myOlExp = Nothing
+
 End Sub
 
 Private Sub cmdSave_Click()
@@ -233,11 +371,25 @@ Private Sub addCategoryAndSave_Click()
 End Sub
 
 Private Sub CommandButton1_Click()
- Dim obApp As Object
- 
+   Dim obApp As Object
+    Dim NewEmail As MailItem
     Set obApp = Outlook.Application
- 
- MsgBox obApp.ActiveWindow
+    Set myOlExp = Application.ActiveExplorer
+    myOlExp.Activate
+    Set myOlsel = myOlExp.Selection
+        c = myOlsel.Item(1).Categories
+        c = Replace(c, Mid(c, InStr(c, "ToDo"), 6), "ImportantL1")
+        'MsgBox c
+        myOlsel.Item(1).Categories = c
+        myOlsel.Item(1).Save
+     
+    Set obApp = Nothing
+    Set NewEmail = Nothing
+    UserForm1.Hide
+    UserForm1.Show
+    UserForm1.TextBox1.SetFocus
+    
+    TextBox1.SetFocus
 End Sub
 
 
@@ -301,3 +453,4 @@ End Sub
 Private Sub UserForm_Click()
 
 End Sub
+
