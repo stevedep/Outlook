@@ -1,3 +1,4 @@
+
 Sub outlookweava()
     
     toelichting = InputBox("Toelichting")
@@ -21,10 +22,21 @@ Sub outlookweava()
 
      Set objInsp = objItem.GetInspector
      Set objDoc = objInsp.WordEditor
+     Dim text As String
+        
+        text = ""
+        
+        Dim v() As String
+        v = Split(objDoc.Windows(1).Selection, Chr(13))
+        For i = 0 To UBound(v)
+            
+            text = text & v(i) & Chr(13) & Chr(10)
+        Next
+
      Set objsel = objDoc.Windows(1).Selection
 
     ' Create Excel Application
-    on error resume next
+    On Error Resume Next
     Set xlApp = GetObject(, "Excel.Application")
         If Err <> 0 Then
             Set xlApp = CreateObject("Excel.Application")
@@ -69,7 +81,7 @@ Sub outlookweava()
             newrow.Range(1, 2).Value = objItem.Subject
             newrow.Range(1, 3).Value = objItem.Sender
             newrow.Range(1, 4).Value = Format(objItem.SentOn, "MMM d, yyyy")
-            newrow.Range(1, 5).Value = objsel
+            newrow.Range(1, 5).Value = text 'objsel
             newrow.Range(1, 6).Value = objsel.Start
             newrow.Range(1, 7).Value = objsel.End
             newrow.Range(1, 8).Value = toelichting
